@@ -30,12 +30,13 @@ def set_ics_header(year):
         + "END:STANDARD\n" \
         + "END:VTIMEZONE\n"
 def set_jr_ics(date, eventsummary, eventdetail, uid):
+    subscrible_url='https://raw.githubusercontent.com/gaoxx37/stockHolidayCalendar/main/ChinaHongkongUSAstockholidays.ics '
     return "BEGIN:VEVENT\n" \
         + f"DTSTART;VALUE=DATE:{date}\n" \
         + f"DTSTAMP:{date}T000001\n" \
         + f"UID:{date}T{uid:0>6}_jr\n" \
         + f"CREATED:{date}T000001\n" \
-        + f"DESCRIPTION:{eventdetail}\n" \
+        + f"DESCRIPTION:休市原因:{eventdetail}\\n\\n日历订阅地址→{subscrible_url}\n" \
         + f"LAST-MODIFIED:{datetime.now().strftime('%Y%m%dT%H:%M:%S')}\n" \
         + "SEQUENCE:0\n" \
         + "STATUS:CONFIRMED\n" \
