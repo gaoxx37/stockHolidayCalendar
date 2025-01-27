@@ -66,6 +66,7 @@ if __name__ == '__main__':
     if response.status_code == 200:
         htmlcontent = response.text
 
+    htmlcontent=htmlcontent.replace("null","\"null\"")
 
     content=eval(htmlcontent)
     date_and_event=[(datetime.strptime(item['start'],'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d'), \
