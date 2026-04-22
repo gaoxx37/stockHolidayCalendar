@@ -59,13 +59,17 @@ if __name__ == '__main__':
 
     #reference1 https://blog.51cto.com/u_15652786/5325292
     #reference2 https://www.zhihu.com/question/33872126/answer/2287006459
-    url_jisilu=f'https://www.jisilu.cn/data/calendar/get_calendar_data/?qtype=OTHER&start={starttime}&end={endtime}'
+    url_jisilu=[f'https://www.jisilu.cn/data/calendar/get_calendar_data/?qtype=OTHER&start={starttime}&end={endtime}',
+    f'https://www.jisilu.cn/data/calendar/get_calendar_data/?qtype=idxfut&start={starttime}&end={endtime}',
+    f'https://www.jisilu.cn/data/calendar/get_calendar_data/?qtype=idxopt&start={starttime}&end={endtime}']
 
     #reference1  https://blog.csdn.net/weixin_46281427/article/details/124641599
-    response = httpx.get(url_jisilu)
-    if response.status_code == 200:
-        htmlcontent = response.text
-
+    htmlcontent=''
+    for onetype_url in url_jisilu:
+        response = httpx.get(onetype_url)
+        if response.status_code == 200:
+            htmlcontent = htmlcontent+','+response.text[1:-1]
+    htmlcontent = "["+ htmlcontent[1:]+"]"
     htmlcontent=htmlcontent.replace("null","\"null\"")
 
     content=eval(htmlcontent)
